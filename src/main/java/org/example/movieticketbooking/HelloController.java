@@ -19,14 +19,12 @@ public class HelloController {
     @FXML
     private Label notificationLabel;
 
-    // Initialize method called after FXML loading
     @FXML
     public void initialize() {
         // Populate the dropdown with sample movie titles (can be replaced with database data)
-        movieDropdown.getItems().addAll("Avatar", "Inception", "Titanic", "Interstellar");
+        movieDropdown.getItems().addAll("The Shawshank Redemption", "The Godfather", "The Dark Knight", "Forrest Gump", "Inception");
     }
 
-    // Event handler for the "Book Now" button
     @FXML
     public void handleBookNow() {
         String selectedMovie = movieDropdown.getValue();
@@ -34,7 +32,6 @@ public class HelloController {
         String ticketCountText = ticketCountField.getText();
 
         try {
-            // Validate inputs
             if (selectedMovie == null || selectedMovie.isEmpty()) {
                 throw new IllegalArgumentException("Please select a movie.");
             }

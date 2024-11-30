@@ -10,7 +10,6 @@ public class Movie {
     private Date releaseDate;
     private String rating;
 
-    // Constructor
     public Movie(int id, String title, String genre, int duration, java.sql.Date releaseDate, String rating) {
         this.id = id;
         this.title = title;
@@ -20,7 +19,6 @@ public class Movie {
         this.rating = rating;
     }
 
-    // Getters and Setters
     public int getId() {
         return id;
     }

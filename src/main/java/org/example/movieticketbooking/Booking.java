@@ -5,19 +5,17 @@ import java.util.Date;
 public class Booking {
 
     private int id;
-    private int userId;
-    private int movieId;
+    private String userName;
+    private String movieTitle;
     private String showtime;
     private int seatCount;
     private Date bookingDate; // Added for additional tracking
 
-    public Booking() {
-    }
 
-    public Booking(int id, int userId, int movieId, String showtime, int seatCount, Date bookingDate) {
+    public Booking(int id, String userName, String movieTitle, String showtime, int seatCount, Date bookingDate) {
         this.id = id;
-        this.userId = userId;
-        this.movieId = movieId;
+        this.userName = userName;
+        this.movieTitle = movieTitle;
         this.showtime = showtime;
         this.seatCount = seatCount;
         this.bookingDate = bookingDate;
@@ -31,20 +29,20 @@ public class Booking {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public int getMovieId() {
-        return movieId;
+    public String getMovieTitle() {
+        return movieTitle;
     }
 
-    public void setMovieId(int movieId) {
-        this.movieId = movieId;
+    public void setMovieTitle(String movieTitle) {
+        this.movieTitle = movieTitle;
     }
 
     public String getShowtime() {
@@ -75,8 +73,8 @@ public class Booking {
     public String toString() {
         return "Booking{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", movieId=" + movieId +
+                ", userId=" + userName +
+                ", movieId=" + movieTitle +
                 ", showtime='" + showtime + '\'' +
                 ", seatCount=" + seatCount +
                 ", bookingDate=" + bookingDate +

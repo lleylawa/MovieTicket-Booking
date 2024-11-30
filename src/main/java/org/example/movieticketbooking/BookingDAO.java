@@ -4,10 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieDAO implements DAOInterface<Movie> {
+public class BookingDAO implements DAOInterface<Booking> {
     private Connection conn;
 
-    public MovieDAO() {
+    public BookingDAO() {
         String url = "jdbc:postgresql://localhost:5432/MovieTicket-Booking"; // Adjust your DB name
         String username = "postgres";
         String password = "leyla@2006";
@@ -21,14 +21,15 @@ public class MovieDAO implements DAOInterface<Movie> {
     }
 
     @Override
-    public int insert(Movie entity) {
-        String sql = "INSERT INTO Movies (title, genre, duration, release_date, rating) VALUES (?, ?, ?, ?, ?)";
+    public int insert(Booking entity) {
+        String sql = "INSERT INTO Bookings (user_name, movie_title, showtime, seatCount, booking_date) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setString(2, entity.getGenre());
-            preparedStatement.setInt(3, entity.getDuration());
-            preparedStatement.setDate(4, new java.sql.Date(entity.getReleaseDate().getTime()));
-            preparedStatement.setString(5, entity.getRating());
+            preparedStatement.setString(1, String.valueOf(entity.getUserName()));
+            preparedStatement.setString(2, String.valueOf(entity.getMovieTitle()));
+            preparedStatement.setString(3, entity.getShowtime());
+            preparedStatement.setInt(4, entity.getSeatCount());
+            preparedStatement.setDate(5, new java.sql.Date(entity.getBookingDate().getTime())); // Set booking_date
+
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
@@ -37,7 +38,7 @@ public class MovieDAO implements DAOInterface<Movie> {
 
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1);
+                    return generatedKeys.getInt(1); // Return generated ID
                 }
             }
         } catch (SQLException e) {
@@ -47,19 +48,19 @@ public class MovieDAO implements DAOInterface<Movie> {
     }
 
     @Override
-    public Movie read(int id) {
-        String sql = "SELECT * FROM Movies WHERE id = ?";
+    public Booking read(int id) {
+        String sql = "SELECT * FROM Bookings WHERE id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, id);
             try (ResultSet rs = preparedStatement.executeQuery()) {
                 if (rs.next()) {
-                    return new Movie(
+                    return new Booking(
                             rs.getInt("id"),
-                            rs.getString("title"),
-                            rs.getString("genre"),
-                            rs.getInt("duration"),
-                            rs.getDate("release_date"),
-                            rs.getString("rating")
+                            rs.getString("user_name"),
+                            rs.getString("movie_title"),
+                            rs.getString("showtime"),
+                            rs.getInt("seatCount"),
+                            rs.getDate("booking_date") // Retrieve booking_date
                     );
                 }
             }
@@ -70,21 +71,22 @@ public class MovieDAO implements DAOInterface<Movie> {
     }
 
     @Override
-    public void update(Movie entity) {
-        String sql = "UPDATE Movies SET title = ?, genre = ?, duration = ?, release_date = ?, rating = ? WHERE id = ?";
+    public void update(Booking entity) {
+        String sql = "UPDATE Bookings SET user_name = ?, movie_title = ?, showtime = ?, seatCount = ?, booking_date = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, entity.getTitle());
-            preparedStatement.setString(2, entity.getGenre());
-            preparedStatement.setInt(3, entity.getDuration());
-            preparedStatement.setDate(4, new java.sql.Date(entity.getReleaseDate().getTime()));
-            preparedStatement.setString(5, entity.getRating());
+            preparedStatement.setString(1, String.valueOf(entity.getUserName()));
+            preparedStatement.setString(2, String.valueOf(entity.getMovieTitle()));
+            preparedStatement.setString(3, entity.getShowtime());
+            preparedStatement.setInt(4, entity.getSeatCount());
+            preparedStatement.setDate(5, new java.sql.Date(entity.getBookingDate().getTime())); // Set booking_date
             preparedStatement.setInt(6, entity.getId());
+
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
-                System.err.println("Update failed: No movie found with ID " + entity.getId());
+                System.err.println("Update failed: No booking found with ID " + entity.getId());
             } else {
-                System.out.println("Movie with ID " + entity.getId() + " updated successfully.");
+                System.out.println("Booking with ID " + entity.getId() + " updated successfully.");
             }
         } catch (SQLException e) {
             System.err.println("Update failed: " + e.getMessage());
@@ -92,16 +94,16 @@ public class MovieDAO implements DAOInterface<Movie> {
     }
 
     @Override
-    public void delete(Movie entity) {
-        String sql = "DELETE FROM Movies WHERE id = ?";
+    public void delete(Booking entity) {
+        String sql = "DELETE FROM Bookings WHERE id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setInt(1, entity.getId());
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
-                System.err.println("Delete failed: No movie found with ID " + entity.getId());
+                System.err.println("Delete failed: No booking found with ID " + entity.getId());
             } else {
-                System.out.println("Movie with ID " + entity.getId() + " deleted successfully.");
+                System.out.println("Booking with ID " + entity.getId() + " deleted successfully.");
             }
         } catch (SQLException e) {
             System.err.println("Delete failed: " + e.getMessage());
@@ -109,23 +111,23 @@ public class MovieDAO implements DAOInterface<Movie> {
     }
 
     @Override
-    public List<Movie> findAll() {
-        List<Movie> movies = new ArrayList<>();
-        String sql = "SELECT * FROM Movies";
+    public List<Booking> findAll() {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT * FROM Bookings";
         try (Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                movies.add(new Movie(
+                bookings.add(new Booking(
                         rs.getInt("id"),
-                        rs.getString("title"),
-                        rs.getString("genre"),
-                        rs.getInt("duration"),
-                        rs.getDate("release_date"),
-                        rs.getString("rating")
+                        rs.getString("user_name"),
+                        rs.getString("movie_title"),
+                        rs.getString("showtime"),
+                        rs.getInt("seatCount"),
+                        rs.getDate("booking_date") // Retrieve booking_date
                 ));
             }
         } catch (SQLException e) {
             System.err.println("Find all failed: " + e.getMessage());
         }
-        return movies;
+        return bookings;
     }
 }
