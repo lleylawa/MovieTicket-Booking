@@ -163,33 +163,29 @@ public class Main {
     private static void updateBooking() {
         System.out.print("Enter Booking ID to update: ");
         int bookingId = Integer.parseInt(scanner.nextLine());
-        Booking booking = bookingDAO.read(bookingId); // Retrieve the booking
+        Booking booking = bookingDAO.read(bookingId);
 
         if (booking != null) {
             System.out.println("Current details: " + booking);
 
-            // Update the username
             System.out.print("Enter new User Name (leave blank to keep current): ");
             String userName = scanner.nextLine();
             if (!userName.isEmpty()) {
                 booking.setUserName(userName);
             }
 
-            // Update the movie title
             System.out.print("Enter new Movie Title (leave blank to keep current): ");
             String movieTitle = scanner.nextLine();
             if (!movieTitle.isEmpty()) {
                 booking.setMovieTitle(movieTitle);
             }
 
-            // Update the showtime
             System.out.print("Enter new Showtime (leave blank to keep current): ");
             String showtime = scanner.nextLine();
             if (!showtime.isEmpty()) {
                 booking.setShowtime(showtime);
             }
 
-            // Update the seat count
             System.out.print("Enter new Seat Count (leave blank to keep current): ");
             String seatCountStr = scanner.nextLine();
             if (!seatCountStr.isEmpty()) {
