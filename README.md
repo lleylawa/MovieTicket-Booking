@@ -115,7 +115,7 @@ Unit tests for model methods are provided in the test directory.Tests ensure tha
 
 1. Clone the repository:
    ```bash
-   git clone [https://github.com/your-username/movie-ticket-booking.git](https://github.com/Bektenovich/projectOOP.git)
+   git clone [https://github.com/lleylawa/MovieTicket-Booking.git]
    
 ---
 
