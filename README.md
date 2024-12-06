@@ -80,7 +80,8 @@ Team - Project Leaders
 ## UML Class Diagram
 
 The UML Class Diagram outlines the structure of the Movie Ticket Booking System, including the relationships between the Movie, Booking, and DAO classes.  
-![UML Diagram](path-to-your-uml-diagram.png)
+![image](https://github.com/user-attachments/assets/04a92678-d657-498c-8a1e-b43877b0217d)
+
 
 ---
 
