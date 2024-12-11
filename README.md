@@ -16,15 +16,15 @@ The system includes the following features:
 ## Project Requirements List
 
 ### Movie Management:
-- Add a new movie with details such as title,genre,duration,release date,and rating.
+- Add a new movie with details such as title, genre and price.
 - View a list of all available movies.
 - Update movie details.
 - Delete a movie from the database.
 
 ### Booking Management:
-- Add a new booking (user name,movie title,seat count,showtime,booking date).
+- Add a new booking (user name, movie title, seat count, booking date).
 - View all bookings.
-- Update booking details (user name,movie title,seat count,etc.).
+- Update booking details (user name, movie title, seat count, etc.).
 - Delete a booking.
 
 ### Database Interaction:
@@ -70,17 +70,31 @@ Team - Project Leaders
 ## Screenshots
 
 - Main Interface:  
-  ![Main Interface](path-to-your-screenshot.png)
+
+![image](https://github.com/user-attachments/assets/6c01962a-c661-4777-a5d5-9df6a7a98b82)
+
+![image](https://github.com/user-attachments/assets/25b82b26-b122-49ef-b487-4c1ea51ab65f)
+
   
-- Movie Booking Screen:  
-  ![Booking Screen](path-to-your-screenshot.png)
+- Database Connection:  
+
+![image](https://github.com/user-attachments/assets/1cc773b1-969a-4351-8cf8-5863dcd9260f)
+
+![image](https://github.com/user-attachments/assets/5389136b-dd46-4209-9860-d87cb9a1a967)
+
+
+- Main.java:
+
+![image](https://github.com/user-attachments/assets/c15f5416-eacc-4faa-8b03-f3d306a16db1)
+
 
 ---
 
 ## UML Class Diagram
 
 The UML Class Diagram outlines the structure of the Movie Ticket Booking System, including the relationships between the Movie, Booking, and DAO classes.  
-![image](https://github.com/user-attachments/assets/04a92678-d657-498c-8a1e-b43877b0217d)
+![image](https://github.com/user-attachments/assets/dca22120-a5cd-469b-b487-d151f7b32836)
+
 
 
 ---
@@ -88,12 +102,12 @@ The UML Class Diagram outlines the structure of the Movie Ticket Booking System,
 ## Code Structure
 
 ### Model:
-- Movie.java: Represents the Movie entity,with attributes like title,genre,duration,release date,and rating.
-- Booking.java: Represents a Booking entity,containing information like user name,movie title,seat count,showtime,and booking date.
+- Movie.java: Represents the Movie entity,with attributes like title, genre and price.
+- Booking.java: Represents a Booking entity,containing information like user name, movie title, seat count and booking date.
 
 ### View:
 - HelloApplication.java: The main entry point for the JavaFX application that initializes the GUI and launches the main stage.
-- HelloController.java: Handles user input,including booking tickets,validating user data,and updating the GUI with notifications.
+- HelloController.java: Handles user input,including booking tickets, validating user data, and updating the GUI with notifications.
 
 ### Controller:
 - MovieDAO.java: Provides data access methods for movie-related operations (CRUD-Create,Read,Update,Delete).
@@ -101,7 +115,7 @@ The UML Class Diagram outlines the structure of the Movie Ticket Booking System,
 - DAOInterface.java: A generic interface that both MovieDAO and BookingDAO implement to handle CRUD operations.
 
 ### Database:
-- PostgreSQL is used as the database for storing movies and bookings.The system connects to the database through JDBC.
+- PostgreSQL is used as the database for storing movies and bookings. The system connects to the database through JDBC.
 
 ---
 
