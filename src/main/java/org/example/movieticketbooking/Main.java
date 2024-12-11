@@ -63,14 +63,10 @@ public class Main {
         String title = scanner.nextLine();
         System.out.print("Enter genre: ");
         String genre = scanner.nextLine();
-        System.out.print("Enter duration (minutes): ");
-        int duration = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter release date (YYYY-MM-DD): ");
-        Date releaseDate = Date.valueOf(scanner.nextLine());
-        System.out.print("Enter rating: ");
-        String rating = scanner.nextLine();
+        System.out.print("Enter price: ");
+        double price = Double.parseDouble(scanner.nextLine());
 
-        Movie movie = new Movie(0, title, genre, duration, releaseDate, rating);
+        Movie movie = new Movie(0, title, genre, price);
         int movieId = movieDAO.insert(movie);
         System.out.println("Movie added with ID: " + movieId);
     }
@@ -98,18 +94,12 @@ public class Main {
             String title = scanner.nextLine();
             System.out.print("Enter new genre (leave blank to keep current): ");
             String genre = scanner.nextLine();
-            System.out.print("Enter new duration (leave blank to keep current): ");
-            String durationStr = scanner.nextLine();
-            System.out.print("Enter new release date (YYYY-MM-DD, leave blank to keep current): ");
-            String releaseDateStr = scanner.nextLine();
-            System.out.print("Enter new rating (leave blank to keep current): ");
-            String rating = scanner.nextLine();
+            System.out.print("Enter new price (leave blank to keep current): ");
+            String priceStr = scanner.nextLine();
 
             if (!title.isEmpty()) movie.setTitle(title);
             if (!genre.isEmpty()) movie.setGenre(genre);
-            if (!durationStr.isEmpty()) movie.setDuration(Integer.parseInt(durationStr));
-            if (!releaseDateStr.isEmpty()) movie.setReleaseDate(Date.valueOf(releaseDateStr));
-            if (!rating.isEmpty()) movie.setRating(rating);
+            if (!priceStr.isEmpty()) movie.setPrice(Double.parseDouble(priceStr));
 
             movieDAO.update(movie);
             System.out.println("Movie updated successfully.");
@@ -136,14 +126,15 @@ public class Main {
         String userName = scanner.nextLine();
         System.out.print("Enter movie title: ");
         String movieTitle = scanner.nextLine();
-        System.out.print("Enter showtime: ");
-        String showtime = scanner.nextLine();
         System.out.print("Enter number of seats: ");
         int seatCount = Integer.parseInt(scanner.nextLine());
-        System.out.print("Enter booking date (YYYY-MM-DD): ");
-        Date bookingDate = Date.valueOf(scanner.nextLine());
 
-        Booking booking = new Booking(0, userName, movieTitle, showtime, seatCount, bookingDate);
+        // Ask for the booking date
+        System.out.print("Enter booking date (YYYY-MM-DD): ");
+        String bookingDateStr = scanner.nextLine();
+        Date bookingDate = Date.valueOf(bookingDateStr); // Convert string to Date
+
+        Booking booking = new Booking(0, userName, movieTitle, seatCount, bookingDate);
         int bookingId = bookingDAO.insert(booking);
         System.out.println("Booking added with ID: " + bookingId);
     }
@@ -180,16 +171,18 @@ public class Main {
                 booking.setMovieTitle(movieTitle);
             }
 
-            System.out.print("Enter new Showtime (leave blank to keep current): ");
-            String showtime = scanner.nextLine();
-            if (!showtime.isEmpty()) {
-                booking.setShowtime(showtime);
-            }
-
             System.out.print("Enter new Seat Count (leave blank to keep current): ");
             String seatCountStr = scanner.nextLine();
             if (!seatCountStr.isEmpty()) {
                 booking.setSeatCount(Integer.parseInt(seatCountStr));
+            }
+
+            // Ask for the new booking date (optional)
+            System.out.print("Enter new booking date (YYYY-MM-DD) or press Enter to keep current: ");
+            String bookingDateStr = scanner.nextLine();
+            if (!bookingDateStr.isEmpty()) {
+                Date newBookingDate = Date.valueOf(bookingDateStr);
+                booking.setBookingDate(newBookingDate);
             }
 
             // Update the booking in the database

@@ -1,24 +1,21 @@
 package org.example.movieticketbooking;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Booking {
 
     private int id;
     private String userName;
     private String movieTitle;
-    private String showtime;
     private int seatCount;
-    private Date bookingDate; // Added for additional tracking
+    private Date bookingDate;  // New field for booking date
 
-
-    public Booking(int id, String userName, String movieTitle, String showtime, int seatCount, Date bookingDate) {
+    public Booking(int id, String userName, String movieTitle, int seatCount, Date bookingDate) {
         this.id = id;
         this.userName = userName;
         this.movieTitle = movieTitle;
-        this.showtime = showtime;
         this.seatCount = seatCount;
-        this.bookingDate = bookingDate;
+        this.bookingDate = bookingDate;  // Initialize bookingDate
     }
 
     public int getId() {
@@ -45,14 +42,6 @@ public class Booking {
         this.movieTitle = movieTitle;
     }
 
-    public String getShowtime() {
-        return showtime;
-    }
-
-    public void setShowtime(String showtime) {
-        this.showtime = showtime;
-    }
-
     public int getSeatCount() {
         return seatCount;
     }
@@ -62,23 +51,21 @@ public class Booking {
     }
 
     public Date getBookingDate() {
-        return bookingDate;
+        return bookingDate;  // Getter for bookingDate
     }
 
     public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
+        this.bookingDate = bookingDate;  // Setter for bookingDate
     }
 
     @Override
     public String toString() {
         return "Booking{" +
                 "id=" + id +
-                ", userId=" + userName +
-                ", movieId=" + movieTitle +
-                ", showtime='" + showtime + '\'' +
+                ", userName='" + userName + '\'' +
+                ", movieTitle='" + movieTitle + '\'' +
                 ", seatCount=" + seatCount +
-                ", bookingDate=" + bookingDate +
+                ", bookingDate=" + bookingDate +  // Include bookingDate in the string representation
                 '}';
     }
 }
-

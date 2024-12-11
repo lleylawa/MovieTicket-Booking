@@ -22,13 +22,11 @@ public class MovieDAO implements DAOInterface<Movie> {
 
     @Override
     public int insert(Movie entity) {
-        String sql = "INSERT INTO Movies (title, genre, duration, release_date, rating) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Movies (title, genre, price) VALUES (?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setString(2, entity.getGenre());
-            preparedStatement.setInt(3, entity.getDuration());
-            preparedStatement.setDate(4, new java.sql.Date(entity.getReleaseDate().getTime()));
-            preparedStatement.setString(5, entity.getRating());
+            preparedStatement.setDouble(3, entity.getPrice());
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
@@ -57,9 +55,7 @@ public class MovieDAO implements DAOInterface<Movie> {
                             rs.getInt("id"),
                             rs.getString("title"),
                             rs.getString("genre"),
-                            rs.getInt("duration"),
-                            rs.getDate("release_date"),
-                            rs.getString("rating")
+                            rs.getDouble("price") // Updated to reflect price
                     );
                 }
             }
@@ -71,14 +67,12 @@ public class MovieDAO implements DAOInterface<Movie> {
 
     @Override
     public void update(Movie entity) {
-        String sql = "UPDATE Movies SET title = ?, genre = ?, duration = ?, release_date = ?, rating = ? WHERE id = ?";
+        String sql = "UPDATE Movies SET title = ?, genre = ?, price = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setString(2, entity.getGenre());
-            preparedStatement.setInt(3, entity.getDuration());
-            preparedStatement.setDate(4, new java.sql.Date(entity.getReleaseDate().getTime()));
-            preparedStatement.setString(5, entity.getRating());
-            preparedStatement.setInt(6, entity.getId());
+            preparedStatement.setDouble(3, entity.getPrice()); // Updated to reflect price
+            preparedStatement.setInt(4, entity.getId());
             int affectedRows = preparedStatement.executeUpdate();
 
             if (affectedRows == 0) {
@@ -118,9 +112,7 @@ public class MovieDAO implements DAOInterface<Movie> {
                         rs.getInt("id"),
                         rs.getString("title"),
                         rs.getString("genre"),
-                        rs.getInt("duration"),
-                        rs.getDate("release_date"),
-                        rs.getString("rating")
+                        rs.getDouble("price") // Updated to reflect price
                 ));
             }
         } catch (SQLException e) {

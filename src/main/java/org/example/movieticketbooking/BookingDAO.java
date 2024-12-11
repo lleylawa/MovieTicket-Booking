@@ -22,13 +22,12 @@ public class BookingDAO implements DAOInterface<Booking> {
 
     @Override
     public int insert(Booking entity) {
-        String sql = "INSERT INTO Bookings (user_name, movie_title, showtime, seatCount, booking_date) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Bookings (user_name, movie_title, seatCount, booking_date) VALUES (?, ?, ?, ?)";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            preparedStatement.setString(1, String.valueOf(entity.getUserName()));
-            preparedStatement.setString(2, String.valueOf(entity.getMovieTitle()));
-            preparedStatement.setString(3, entity.getShowtime());
-            preparedStatement.setInt(4, entity.getSeatCount());
-            preparedStatement.setDate(5, new java.sql.Date(entity.getBookingDate().getTime())); // Set booking_date
+            preparedStatement.setString(1, entity.getUserName());
+            preparedStatement.setString(2, entity.getMovieTitle());
+            preparedStatement.setInt(3, entity.getSeatCount());
+            preparedStatement.setDate(4, entity.getBookingDate()); // Set booking date
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -58,9 +57,8 @@ public class BookingDAO implements DAOInterface<Booking> {
                             rs.getInt("id"),
                             rs.getString("user_name"),
                             rs.getString("movie_title"),
-                            rs.getString("showtime"),
                             rs.getInt("seatCount"),
-                            rs.getDate("booking_date") // Retrieve booking_date
+                            rs.getDate("booking_date") // Retrieve booking date
                     );
                 }
             }
@@ -72,14 +70,13 @@ public class BookingDAO implements DAOInterface<Booking> {
 
     @Override
     public void update(Booking entity) {
-        String sql = "UPDATE Bookings SET user_name = ?, movie_title = ?, showtime = ?, seatCount = ?, booking_date = ? WHERE id = ?";
+        String sql = "UPDATE Bookings SET user_name = ?, movie_title = ?, seatCount = ?, booking_date = ? WHERE id = ?";
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
-            preparedStatement.setString(1, String.valueOf(entity.getUserName()));
-            preparedStatement.setString(2, String.valueOf(entity.getMovieTitle()));
-            preparedStatement.setString(3, entity.getShowtime());
-            preparedStatement.setInt(4, entity.getSeatCount());
-            preparedStatement.setDate(5, new java.sql.Date(entity.getBookingDate().getTime())); // Set booking_date
-            preparedStatement.setInt(6, entity.getId());
+            preparedStatement.setString(1, entity.getUserName());
+            preparedStatement.setString(2, entity.getMovieTitle());
+            preparedStatement.setInt(3, entity.getSeatCount());
+            preparedStatement.setDate(4, entity.getBookingDate()); // Set booking date
+            preparedStatement.setInt(5, entity.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -120,9 +117,8 @@ public class BookingDAO implements DAOInterface<Booking> {
                         rs.getInt("id"),
                         rs.getString("user_name"),
                         rs.getString("movie_title"),
-                        rs.getString("showtime"),
                         rs.getInt("seatCount"),
-                        rs.getDate("booking_date") // Retrieve booking_date
+                        rs.getDate("booking_date") // Retrieve booking date
                 ));
             }
         } catch (SQLException e) {

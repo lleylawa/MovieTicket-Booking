@@ -19,10 +19,6 @@
         <Label text="Number of Tickets:" style="-fx-font-size: 14px; -fx-text-fill: #555;" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
         <TextField fx:id="ticketCountField" promptText="Enter number of tickets" style="-fx-pref-width: 250;" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
 
-        <!-- New Field: Showtime -->
-        <Label text="Showtime:" style="-fx-font-size: 14px; -fx-text-fill: #555;" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
-        <TextField fx:id="showtimeField" promptText="Enter showtime (e.g., 6:30 PM)" style="-fx-pref-width: 250;" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-
         <!-- New Field: Booking Date -->
         <Label text="Booking Date:" style="-fx-font-size: 14px; -fx-text-fill: #555;" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
         <DatePicker fx:id="bookingDateField" style="-fx-pref-width: 250;" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
