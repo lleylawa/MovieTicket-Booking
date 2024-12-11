@@ -8,14 +8,14 @@ public class Booking {
     private String userName;
     private String movieTitle;
     private int seatCount;
-    private Date bookingDate;  // New field for booking date
+    private Date bookingDate;
 
     public Booking(int id, String userName, String movieTitle, int seatCount, Date bookingDate) {
         this.id = id;
         this.userName = userName;
         this.movieTitle = movieTitle;
         this.seatCount = seatCount;
-        this.bookingDate = bookingDate;  // Initialize bookingDate
+        this.bookingDate = bookingDate;
     }
 
     public int getId() {
@@ -51,11 +51,11 @@ public class Booking {
     }
 
     public Date getBookingDate() {
-        return bookingDate;  // Getter for bookingDate
+        return bookingDate;
     }
 
     public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;  // Setter for bookingDate
+        this.bookingDate = bookingDate;
     }
 
     @Override
@@ -65,7 +65,7 @@ public class Booking {
                 ", userName='" + userName + '\'' +
                 ", movieTitle='" + movieTitle + '\'' +
                 ", seatCount=" + seatCount +
-                ", bookingDate=" + bookingDate +  // Include bookingDate in the string representation
+                ", bookingDate=" + bookingDate +
                 '}';
     }
 }

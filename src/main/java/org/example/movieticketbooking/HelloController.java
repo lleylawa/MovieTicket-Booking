@@ -31,7 +31,6 @@ public class HelloController {
 
     @FXML
     public void initialize() {
-        // Populate the dropdown with movie titles fetched from the database
         List<Movie> movies = movieDAO.findAll();
         for (Movie movie : movies) {
             movieDropdown.getItems().add(movie.getTitle());
@@ -46,7 +45,6 @@ public class HelloController {
         LocalDate bookingDate = bookingDateField.getValue();
 
         try {
-            // Validate inputs
             if (selectedMovie == null || selectedMovie.isEmpty()) {
                 throw new IllegalArgumentException("Please select a movie.");
             }
@@ -62,25 +60,18 @@ public class HelloController {
                 throw new IllegalArgumentException("Please enter a valid number of tickets.");
             }
 
-            // Convert LocalDate to java.sql.Date
             java.sql.Date sqlBookingDate = java.sql.Date.valueOf(bookingDate);
 
-            // Fetch the movie from the database by title
             Movie movie = movieDAO.findAll().stream()
                     .filter(m -> m.getTitle().equals(selectedMovie))
                     .findFirst()
                     .orElseThrow(() -> new IllegalArgumentException("Movie not found in the database."));
 
-            // Create and insert the booking
             Booking booking = new Booking(0, userName, selectedMovie, ticketCount, sqlBookingDate);
             bookingDAO.insert(booking);
 
-            // Notify the user of a successful booking
             notificationLabel.setStyle("-fx-text-fill: green;");
-            notificationLabel.setText(String.format(
-                    "Booking successful for %d ticket(s) to %s. Date: %s.",
-                    ticketCount, selectedMovie, bookingDate
-            ));
+            notificationLabel.setText(String.format("Booking successful for %d ticket(s) to %s. Date: %s.", ticketCount, selectedMovie, bookingDate));
         } catch (NumberFormatException e) {
             notificationLabel.setStyle("-fx-text-fill: red;");
             notificationLabel.setText("Invalid ticket count. Please enter a number.");

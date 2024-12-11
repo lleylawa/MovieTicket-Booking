@@ -129,10 +129,9 @@ public class Main {
         System.out.print("Enter number of seats: ");
         int seatCount = Integer.parseInt(scanner.nextLine());
 
-        // Ask for the booking date
         System.out.print("Enter booking date (YYYY-MM-DD): ");
         String bookingDateStr = scanner.nextLine();
-        Date bookingDate = Date.valueOf(bookingDateStr); // Convert string to Date
+        Date bookingDate = Date.valueOf(bookingDateStr);
 
         Booking booking = new Booking(0, userName, movieTitle, seatCount, bookingDate);
         int bookingId = bookingDAO.insert(booking);
@@ -177,7 +176,6 @@ public class Main {
                 booking.setSeatCount(Integer.parseInt(seatCountStr));
             }
 
-            // Ask for the new booking date (optional)
             System.out.print("Enter new booking date (YYYY-MM-DD) or press Enter to keep current: ");
             String bookingDateStr = scanner.nextLine();
             if (!bookingDateStr.isEmpty()) {
@@ -185,7 +183,6 @@ public class Main {
                 booking.setBookingDate(newBookingDate);
             }
 
-            // Update the booking in the database
             try {
                 bookingDAO.update(booking);
                 System.out.println("Booking updated successfully.");

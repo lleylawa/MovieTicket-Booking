@@ -8,7 +8,7 @@ public class MovieDAO implements DAOInterface<Movie> {
     private Connection conn;
 
     public MovieDAO() {
-        String url = "jdbc:postgresql://localhost:5432/MovieTicket-Booking"; // Adjust your DB name
+        String url = "jdbc:postgresql://localhost:5432/MovieTicket-Booking";
         String username = "postgres";
         String password = "leyla@2006";
 
@@ -71,7 +71,7 @@ public class MovieDAO implements DAOInterface<Movie> {
         try (PreparedStatement preparedStatement = conn.prepareStatement(sql)) {
             preparedStatement.setString(1, entity.getTitle());
             preparedStatement.setString(2, entity.getGenre());
-            preparedStatement.setDouble(3, entity.getPrice()); // Updated to reflect price
+            preparedStatement.setDouble(3, entity.getPrice());
             preparedStatement.setInt(4, entity.getId());
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -112,7 +112,7 @@ public class MovieDAO implements DAOInterface<Movie> {
                         rs.getInt("id"),
                         rs.getString("title"),
                         rs.getString("genre"),
-                        rs.getDouble("price") // Updated to reflect price
+                        rs.getDouble("price")
                 ));
             }
         } catch (SQLException e) {

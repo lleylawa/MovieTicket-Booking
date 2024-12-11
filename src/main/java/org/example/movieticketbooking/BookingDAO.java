@@ -8,7 +8,7 @@ public class BookingDAO implements DAOInterface<Booking> {
     private Connection conn;
 
     public BookingDAO() {
-        String url = "jdbc:postgresql://localhost:5432/MovieTicket-Booking"; // Adjust your DB name
+        String url = "jdbc:postgresql://localhost:5432/MovieTicket-Booking";
         String username = "postgres";
         String password = "leyla@2006";
 
@@ -27,7 +27,7 @@ public class BookingDAO implements DAOInterface<Booking> {
             preparedStatement.setString(1, entity.getUserName());
             preparedStatement.setString(2, entity.getMovieTitle());
             preparedStatement.setInt(3, entity.getSeatCount());
-            preparedStatement.setDate(4, entity.getBookingDate()); // Set booking date
+            preparedStatement.setDate(4, entity.getBookingDate());
 
             int affectedRows = preparedStatement.executeUpdate();
 
@@ -37,7 +37,7 @@ public class BookingDAO implements DAOInterface<Booking> {
 
             try (ResultSet generatedKeys = preparedStatement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
-                    return generatedKeys.getInt(1); // Return generated ID
+                    return generatedKeys.getInt(1);
                 }
             }
         } catch (SQLException e) {
@@ -58,7 +58,7 @@ public class BookingDAO implements DAOInterface<Booking> {
                             rs.getString("user_name"),
                             rs.getString("movie_title"),
                             rs.getInt("seatCount"),
-                            rs.getDate("booking_date") // Retrieve booking date
+                            rs.getDate("booking_date")
                     );
                 }
             }
@@ -75,7 +75,7 @@ public class BookingDAO implements DAOInterface<Booking> {
             preparedStatement.setString(1, entity.getUserName());
             preparedStatement.setString(2, entity.getMovieTitle());
             preparedStatement.setInt(3, entity.getSeatCount());
-            preparedStatement.setDate(4, entity.getBookingDate()); // Set booking date
+            preparedStatement.setDate(4, entity.getBookingDate());
             preparedStatement.setInt(5, entity.getId());
 
             int affectedRows = preparedStatement.executeUpdate();
@@ -118,7 +118,7 @@ public class BookingDAO implements DAOInterface<Booking> {
                         rs.getString("user_name"),
                         rs.getString("movie_title"),
                         rs.getInt("seatCount"),
-                        rs.getDate("booking_date") // Retrieve booking date
+                        rs.getDate("booking_date")
                 ));
             }
         } catch (SQLException e) {
